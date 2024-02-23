@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>SuperViral - Generate Viral Video Titles</title>
+</head>
+<body>
+    <h1>SuperViral</h1>
+    <p>Get viral video ideas in seconds</p>
+
+    <form id="title-form">
+        <input type="text" name="youtube_title" placeholder="Enter a YouTube title">
+        <button type="submit">SUBMIT</button>
+    </form>
+
+    <div id="generated-titles"></div>
+
+    <script>
+        document.getElementById('title-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            const response = await fetch('/generate_titles', {
+                method: 'POST',
+                body: formData
+            });
+            document.getElementById('generated-titles').innerText = await response.json();
+        };
+    </script>
+</body>
+</html>
